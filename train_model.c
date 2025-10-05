@@ -6,8 +6,8 @@
 #include "tokenizer.h"
 #include "nn_utils.h"
 
-#define INPUTS 27
-#define OUTPUTS 27
+#define INPUTS 64
+#define OUTPUTS 64
 #define EPOCHS 5000
 #define LR 0.5
 
@@ -16,7 +16,7 @@ static void one_hot(int idx, double *v, int size) {
     v[idx] = 1.0;
 }
 
-void train_model(const char *data_path, const char *weights_out) {
+void train_model(const char *data_path, const char *weights_out, int epochs) {
     FILE *f = fopen(data_path, "r");
     if (!f) { perror("data"); exit(1); }
 
@@ -32,7 +32,7 @@ void train_model(const char *data_path, const char *weights_out) {
         for (int j=0;j<OUTPUTS;j++)
             W[i][j] = rand_weight();
 
-    for (int epoch=0; epoch<EPOCHS; epoch++) {
+    for (int epoch=0; epoch<epochs; epoch++) {
         double total_error = 0.0;
         for (size_t t=0; t+1<n; t++) {
             int in = char_to_token(text[t]);

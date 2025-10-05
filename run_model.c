@@ -5,8 +5,8 @@
 #include "nn_utils.h"
 #include "tokenizer.h"
 
-#define INPUTS 27
-#define OUTPUTS 27
+#define INPUTS 64
+#define OUTPUTS 64
 
 static void one_hot(int idx, double *v, int size) {
     for (int i = 0; i < size; i++) v[i] = 0.0;
